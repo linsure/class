@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                ITM 7980 Professional Questionnaire Survey
+            </h1>
+            <div class="columns">
+                <form class="column is-one-third" method="post" action="/bookings" onsubmit="postData(this);return false;">
+
+                    <!-- NAME (name)-->
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">
+                            <input name="name" class="input" type="text" placeholder="Text input" required>
+                        </div>
+                    </div>
+
+                    <!-- STUDENT ID (number) -->
+
+                    <div class="field">
+                        <label class="label">Student ID</label>
+                        <div class="control">
+                            <input name="number" class="input" type="text" placeholder="Input your Student ID" >
+                        </div>
+                    </div>
+
+                    <!-- AGE (age)-->
+                    <div class="field">
+                        <label class="label">AGE</label>
+                        <div class="control">
+                            <input name="age" class="input" type="text" placeholder="Input your AGE" >
+                        </div>
+                    </div>
+
+
+
+                    <!--1. When did you graduate? (year)-->
+                    <div class="field">
+                        <label class="label">1.When did you graduate?</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input name="year" class="input is-success" type="number" min=1990 max=2021 placeholder="2021"> 
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- 2. What is youre favorite class? (fclass)-->
+                    <div class="field">
+                        <label class="label">2. What is youre favorite class?</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="fclass" >
+                                    <option value="">Select your favourite class here.</option>
+                                    <option value="7510">7510</option>
+                                    <option value="7520">7520</option>
+                                    <option value="7980">7980</option>
+                                    <option value="7990">7990</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                     <!-- 3. Which teacher do you like best? (fteacher)-->
+                    
+                    <div class="field">
+                        <label class="label">3. Who is youre favorite teacher?</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="fclass" >
+                                    <option value="">Select your favourite teacher here.</option>
+                                    <option value="martin">martin</option>
+                                    <option value="tony">tony</option>
+                                    <option value="choi">choi</option>
+                                    <option value="nobody">nobody</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- 4.Do you enjoy your study now? (enjoy)-->
+
+        
+                    <div class="field">
+                        <label class="label">4.Do you enjoy your study now?</label>
+                        <div class="control">
+                            <label class="radio">
+                                <input name="enjoy" type="radio" value="yes">
+                                Yes!
+                            </label>
+                            <label class="radio">
+                                <input name="enjoy" type="radio" value="no">
+                                Nope.....
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <!-- 5.What is your future plan?(message) -->
+                    <div class="field">
+                        <label class="label">5.What is your future plan?</label>
+                        <div class="control">
+                            <textarea name="message" class="textarea" placeholder="Textarea" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                <!-- I agree to the <a href="#">terms and conditions</a> -->
+                                I agree that the above data will be used for assignment2s
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button type="submit"  class="button is-link">Submit</button>
+                        </div>
+                        <div class="control">
+                            <button type="reset" class="button is-link is-light">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="columns">
+                <div class="column">
+                    <div id="pieChartDiv"><canvas id="pieChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="javascripts/piechart.js"></script>
+    <script>
+        async function postData(elem) {
+            var response = await fetch(elem.action, {
+                method: elem.method,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(new FormData(elem))
+            });
+            console.log(response);
+            if (response.ok) {
+                var data = await response.json();
+                console.log(JSON.stringify(data));
+                pieChart();
+            } else {
+                alert(response.status + " " + response.statusCode);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>All Bookings</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <table>
+        <% bookings.forEach( function(booking) { %>
+
+            <tr>
+                <td>
+                    <%= booking.$loki %>
+                </td>
+                <td>
+                    <%= booking.name %>
+                </td>
+                <td>
+                    <%= booking.number %>
+                </td>
+            </tr>
+
+            <% }); %>
+    </table>
+</body>
+
+</html>
