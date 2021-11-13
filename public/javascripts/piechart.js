@@ -1,5 +1,7 @@
 var numOfyes = 0;
 var numOfno = 0;
+var pieChart;
+
 async function GetNumOfYesAndNo() {
     var response = await fetch('/numOfyes');
     if (response.ok) {
@@ -42,7 +44,7 @@ function pieChart() {
             type: 'doughnut',
             data: piedata,
         };
-        var pieChart = new Chart(
+        pieChart = new Chart(
             document.getElementById('pieChart'),
             config
         );
